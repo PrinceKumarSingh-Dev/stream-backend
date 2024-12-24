@@ -46,7 +46,6 @@ public class VideoController {
     public ResponseEntity<ResourceRegion> streamVideo(@PathVariable String videoName, @RequestHeader HttpHeaders headers) {
         System.out.println("headers" + headers.getRange());
         System.out.println("Requested File Name: " + videoName);
-        System.out.println("Requested File Name: " + videoName);
         return videoStreamingService.streamVideo(videoName, headers);
     }
 }

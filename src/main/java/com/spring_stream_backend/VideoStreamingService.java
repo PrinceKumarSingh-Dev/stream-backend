@@ -250,13 +250,14 @@ public class VideoStreamingService {
         System.out.println("video resource :" + videoResource);
         // Determine content length
         long contentLength = getResourceContentLength(videoResource);
-        System.out.println("content leangth :" + contentLength);
+        System.out.println("content length :" + contentLength);
         // Calculate the region to stream
         ResourceRegion region = calculateResourceRegion(videoResource, headers, contentLength);
         System.out.println("region :" + region);
         // Build and return the response
         MediaType mediaType = MediaTypeFactory.getMediaType(videoResource).orElse(MediaType.APPLICATION_OCTET_STREAM);
         System.out.println("media type :" + mediaType);
+        System.out.println("Returning video file");
         return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).contentType(mediaType).body(region);
     }
 

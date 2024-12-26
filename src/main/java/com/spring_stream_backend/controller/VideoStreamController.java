@@ -1,5 +1,6 @@
-package com.spring_stream_backend;
+package com.spring_stream_backend.controller;
 
+import com.spring_stream_backend.service.VideoStreamingService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/videos")
+@RequestMapping("/api/stream/videos")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.HEAD, RequestMethod.POST})
-public class VideoController {
+public class VideoStreamController {
 
     @Autowired
     private VideoStreamingService videoStreamingService;
@@ -48,4 +49,5 @@ public class VideoController {
         System.out.println("Requested File Name: " + videoName);
         return videoStreamingService.streamVideo(videoName, headers);
     }
+
 }

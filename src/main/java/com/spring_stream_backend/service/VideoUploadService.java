@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class VideoUploadService {
@@ -34,8 +34,16 @@ public class VideoUploadService {
                 Files.createDirectories(videoDirPath);
             }
 
-            // Create the file path
-            Path videoFilePath = videoDirPath.resolve(Objects.requireNonNull(file.getOriginalFilename()));
+            // Generate a unique filename
+            String originalFileName = file.getOriginalFilename();
+            String fileExtension = "";
+            if (originalFileName != null && originalFileName.contains(".")) {
+                fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            }
+            String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+
+            // Create the file path with unique filename
+            Path videoFilePath = videoDirPath.resolve(uniqueFileName);
             System.out.println("video file path :"+videoFilePath);
             // Copy the file
             try (InputStream input = file.getInputStream()) {
@@ -54,7 +62,7 @@ public class VideoUploadService {
             throw new IllegalArgumentException("File is empty.");
         }
 
-        if (!ALLOWED_CONTENT_TYPES.contains(file.getContentType())) {
+        if (file.getContentType() == null || !ALLOWED_CONTENT_TYPES.contains(file.getContentType())) {
             throw new IllegalArgumentException("Unsupported file type: " + file.getContentType());
         }
 

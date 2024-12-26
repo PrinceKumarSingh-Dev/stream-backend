@@ -40,6 +40,7 @@ public class VideoStreamController {
         String rangeHeader = request.getHeader(HttpHeaders.RANGE);
         System.out.println("Requested File Name: " + fileName);
         System.out.println("Range Header: " + rangeHeader);
+         System.out.println("Range Header: " + rangeHeader);
         return videoStreamingService.streamVideoNio(fileName, rangeHeader);
     }
 

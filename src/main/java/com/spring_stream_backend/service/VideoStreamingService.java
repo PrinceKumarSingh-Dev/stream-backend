@@ -1,4 +1,4 @@
-package com.spring_stream_backend;
+package com.spring_stream_backend.service;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;

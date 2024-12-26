@@ -89,14 +89,13 @@ public class VideoUploadService {
             if (Files.notExists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
-            if (chunkIndex > totalChunks)
-                {
-                    throw new RuntimeException("chunkIndex can not be more then total chunks");
-                }
+            if (chunkIndex > totalChunks) {
+                throw new RuntimeException("chunkIndex can not be more then total chunks");
+            }
 
             // Define chunk file path
-                Path chunkFilePath = directoryPath.resolve("chunk-" + chunkIndex);
-                Files.write(chunkFilePath, file.getBytes(), StandardOpenOption.CREATE);
+            Path chunkFilePath = directoryPath.resolve("chunk-" + chunkIndex);
+            Files.write(chunkFilePath, file.getBytes(), StandardOpenOption.CREATE);
 
             return "Chunk " + chunkIndex + " of " + totalChunks + " uploaded successfully.";
         } catch (IOException e) {

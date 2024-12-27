@@ -13,8 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/file/chunk")
 public class FileChunkController {
 
-    @Autowired
-    private FileChunkService fileChunkService;
+    private final FileChunkService fileChunkService;
+
+    public FileChunkController(FileChunkService fileChunkService) {
+        this.fileChunkService = fileChunkService;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadAndChunkFile(MultipartFile file) {
